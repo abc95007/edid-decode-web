@@ -1,0 +1,8 @@
+{
+  "name": "edid-decode-ui",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs",
+    "verify": "node verify-edid.cjs"
+  }
+}
