@@ -39,6 +39,14 @@ node verify-edid.cjs
 
 This regenerates `sample-output.txt` from `sample-edid.txt`.
 
+## GitHub Pages
+
+This repository is prepared for GitHub Pages deployment.
+
+Expected project site URL:
+
+`https://abc95007.github.io/edid-decode-web/`
+
 ## Notes
 
 - The decoder assets are treated as upstream-generated files.
