@@ -109,6 +109,37 @@
         line-height: 1.4;
       }
 
+      .sample-card {
+        margin-top: 10px;
+        padding: 12px;
+        border: 1px solid #cfcfcf;
+        background: #fff;
+      }
+
+      .sample-card h4 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+
+      .sample-card p {
+        margin: 0 0 8px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .sample-preview {
+        margin: 0;
+        padding: 10px;
+        overflow: auto;
+        background: #f7f7f7;
+        color: #222;
+        font-family: "Lucida Console", Monaco, monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
       @media (max-width: 900px) {
         .layout {
           flex-direction: column;
@@ -145,6 +176,14 @@
           <button id="process" type="button">Process</button>
           <button id="load-sample" type="button">Load Sample EDID</button>
         </div>
+        <div class="sample-card">
+          <h4>Sample</h4>
+          <p>
+            Click <strong>Load Sample EDID</strong> to load a verified sample, then press
+            <strong>Process</strong> to see the parsed result.
+          </p>
+          <pre class="sample-preview" id="sample-preview"></pre>
+        </div>
         <div class="hint">
           <a href="https://git.linuxtv.org/v4l-utils.git/">v4l-utils.git</a>
         </div>
@@ -168,6 +207,7 @@
       const outputElement = document.getElementById("output");
       const errorElement = document.getElementById("error");
       const diagonalElement = document.getElementById("diagonal");
+      const samplePreviewElement = document.getElementById("sample-preview");
 
       function resetConsole() {
         outputElement.value = "";
@@ -211,6 +251,15 @@
         diagonalElement.value = "";
         resetConsole();
       });
+
+      fetch("./sample-edid.txt")
+        .then((response) => response.text())
+        .then((text) => {
+          samplePreviewElement.textContent = text.trim();
+        })
+        .catch(() => {
+          samplePreviewElement.textContent = "Unable to load sample preview.";
+        });
 
       var Module = {
         noInitialRun: true,
